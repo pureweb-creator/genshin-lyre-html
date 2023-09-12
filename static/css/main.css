@@ -202,7 +202,8 @@ img{
 }
 
 .lyre{
-    width: 700px;
+    max-width: 700px;
+    width: 100%;
     margin: 0 auto 70px;
 }
 
@@ -211,6 +212,7 @@ img{
     align-items: center;
     justify-content: space-between;
     margin-bottom: 25px;
+    flex-wrap: wrap;
 }
 
 
@@ -225,6 +227,7 @@ img{
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .lyre__key.active{
@@ -240,4 +243,15 @@ img{
     color: #818111;
     position: relative;
     top: -11px;
+}
+
+@media (max-width: 485px){
+    .lyre__line{
+        justify-content: center;
+        margin-bottom: 0;
+    }
+
+    .lyre__key{
+        margin-bottom: 10px;
+    }
 }
