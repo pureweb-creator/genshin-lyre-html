@@ -181,6 +181,7 @@
 
 <script>
     var notes = ["JWQJH","WQJH","HGFFGD","DDDDEW","QJJJQQ","QWQJHWQJH","HGFFGD","DDDDEW","QJJJQQ","JQQQ","QEEWW","QWQJGD","JQQQ","QEEWWQ","EWWJQ","GDGG","DDSS","DDGG","DDSS","DDGG","DDSSDD","DEW","EWWWQJQJ","GEWWWQJQTJ","QYTEQJQJHJQ","QJQJG","DEWWQJQJGG","EWWQJQTJ","QYTEQJ"]
+    
     const melody = notes.join('').toLowerCase().split('')
 
     var melodyOriginal = notes;
@@ -202,14 +203,19 @@
 
     document.getElementById(melody[counter]).classList.add('active')
 
-    window.addEventListener('keydown', function(e){
-        var key = e.key
+    window.addEventListener('keydown', handleKeyPress)
+    document.querySelectorAll('.lyre__line .lyre__key').forEach((key) => {
+        key.addEventListener('touchstart', handleKeyPress)
+    })
+
+    function handleKeyPress(e){
+        var key = e.key || this.id
 
         if (!availableKeys.includes(key)) return false
         if (key!=melody[counter]) return false
         if (counter==melody.length) location.reload()
 
-        var audio = new Audio(`static/audio/${e.key}.mp3`)
+        var audio = new Audio(`static/audio/${key}.mp3`)
         audio.play()
 
         document.getElementById('letter_'+counter).classList.add('active')
@@ -219,8 +225,7 @@
             counter++
             document.getElementById(melody[counter]).classList.add('active')
         }
-
-    });  
+    }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
